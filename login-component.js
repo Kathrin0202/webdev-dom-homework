@@ -1,12 +1,12 @@
 import { registerUser, loginUser } from "./api.js";
-import { format } from 'date-fns';
+import { format } from "./node_modules/date-fns";
 
 const appEl = document.querySelector(".container");
 export function renderLogin({appEl, renderTasks, comments, setToken }) {
   let isLogin = true;
-  const createDate = format(new Date(comments.created_at), 'YYYY-MM-DD hh.mm.ss');
   const now = new Date();
   format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
+  const createDate = format(new Date(), 'YYYY-MM-DD hh.mm.ss');
   const renderForm = () => {
       const listComment = comments.map((user, index) => {
         return `<li data-index="${index}" class="comment">
