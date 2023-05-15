@@ -23,6 +23,42 @@ const fetch = () => {
   });
   };
 
+  const answer = () => {
+    const answerComments = document.querySelectorAll(".comment");
+    const formText = document.querySelector(".add-form-text");
+    for (const answerComment of answerComments){
+      answerComment.addEventListener('click', () =>{
+        const arr = comments[answerComment.dataset.index];
+        let str = arr.text + ' ' + arr.name;
+        formText.value += `${str}`;
+        formText.focus();
+      });
+    };
+    };
+  
+    const initEventLike = () => {
+      const likeButtons = document.querySelectorAll(".like-button");
+      for(const likeButton of likeButtons){
+        const index = likeButton.dataset.index;
+      likeButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        likeButton.classList.add("load-like");
+        delay(2000).then(() => {
+        if (comments[index].likeComment = !comments[index].likeComment) {
+          comments[index].likeComment = false;
+          comments[index].likes += 1;
+        } else {
+          comments[index].likeComment = true;
+          comments[index].likes -= 1;
+        }
+        likeButton.classList.remove("load-like");
+        renderTasks();
+        initEventLike();
+        });
+          });
+        };
+      };
+
     const renderTasks = () => {
       const appEl = document.querySelector(".container");
       if(!token) {
@@ -37,10 +73,8 @@ const fetch = () => {
       }
 
       const listComment = comments.map((user, index) => {
-        const createDate = format(new Date(), 'YYYY-MM-DD hh.mm.ss');
         const now = new Date();
-        format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
-        console.log(createDate);
+        const createDate = format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
         return `<li data-index="${index}" class="comment">
         <div class="comment-header">
           <div>${user.author.name}</div>
@@ -94,41 +128,7 @@ const fetch = () => {
     
     const form = document.querySelector(".add-form");
     const newForm = form.innerHTML;
-    const answer = () => {
-      const answerComments = document.querySelector(".comment");
-      const formText = document.querySelector(".add-form-text");
-      for (const answerComment of answerComments){
-        answerComment.addEventListener('click', () =>{
-          const arr = comments[answerComment.dataset.index];
-          let str = arr.text + ' ' + arr.name;
-          formText.value += `${str}`;
-          formText.focus();
-        });
-      };
-      };
-    
-      const initEventLike = () => {
-        const likeButtons = document.querySelectorAll(".like-button");
-        for(const likeButton of likeButtons){
-          const index = likeButton.dataset.index;
-        likeButton.addEventListener('click', (event) => {
-          event.stopPropagation();
-          likeButton.classList.add("load-like");
-          delay(2000).then(() => {
-          if (comments[index].likeComment = !comments[index].likeComment) {
-            comments[index].likeComment = false;
-            comments[index].likes += 1;
-          } else {
-            comments[index].likeComment = true;
-            comments[index].likes -= 1;
-          }
-          likeButton.classList.remove("load-like");
-          renderTasks();
-          initEventLike();
-          });
-            });
-          };
-        };
+
     
     answer();
     initEventLike();

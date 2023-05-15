@@ -5,8 +5,7 @@ const appEl = document.querySelector(".container");
 export function renderLogin({appEl, renderTasks, comments, setToken }) {
   let isLogin = true;
   const now = new Date();
-  format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
-  const createDate = format(new Date(), 'YYYY-MM-DD hh.mm.ss');
+  const createDate = format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
   const renderForm = () => {
       const listComment = comments.map((user, index) => {
         return `<li data-index="${index}" class="comment">
